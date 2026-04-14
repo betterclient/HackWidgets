@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import dev.betterclient.hackatimewidgets.ui.AddWidgetsUI
+import dev.betterclient.hackatimewidgets.ui.setContent0
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
@@ -31,7 +32,8 @@ class MainActivity : ComponentActivity() {
 
         setContent0 {
             Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                Text("Authenticating...  (please restart app if stuck here)")
+                Text("Authenticating...")
+                Text("Please restart app if stuck here")
                 CircularWavyProgressIndicator()
             }
         }

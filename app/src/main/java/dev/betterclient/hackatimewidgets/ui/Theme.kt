@@ -1,4 +1,4 @@
-package dev.betterclient.hackatimewidgets
+package dev.betterclient.hackatimewidgets.ui
 
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
