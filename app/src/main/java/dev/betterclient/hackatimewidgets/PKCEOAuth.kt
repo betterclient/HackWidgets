@@ -95,7 +95,10 @@ class PKCEOAuth(
 
         if (code != null) {
             exchangeCodeForToken(code)
+        } else {
+            onFinish(null, "Authorization failed")
         }
+
     }
 
     private suspend fun exchangeCodeForToken(code: String) {

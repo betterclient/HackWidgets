@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
+import dev.betterclient.hackatimewidgets.api.Api
 import dev.betterclient.hackatimewidgets.ui.AddWidgetsUI
 import dev.betterclient.hackatimewidgets.ui.setContent0
 import kotlinx.coroutines.flow.first
@@ -25,11 +26,15 @@ import kotlin.system.exitProcess
 class MainActivity : ComponentActivity() {
     private var activeAuth: PKCEOAuth? = null
 
-    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        startAuthFlow()
+    }
+
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+    fun startAuthFlow() {
         setContent0 {
             Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                 Text("Authenticating...")
@@ -45,6 +50,9 @@ class MainActivity : ComponentActivity() {
                     onFinish = { output, error ->
                         if (output != null) {
                             lifecycleScope.launch { setToken(this@MainActivity, output.accessToken) }
+                            setContent0 {
+                                AddWidgetsUI(Api(output.accessToken), this@MainActivity)
+                            }
                         } else {
                             Toast.makeText(this@MainActivity, error, Toast.LENGTH_SHORT).show()
                             exitProcess(0)
@@ -57,7 +65,7 @@ class MainActivity : ComponentActivity() {
                 )
             } else {
                 setContent0 {
-                    AddWidgetsUI(Api(token))
+                    AddWidgetsUI(Api(token), this@MainActivity)
                 }
             }
         }
