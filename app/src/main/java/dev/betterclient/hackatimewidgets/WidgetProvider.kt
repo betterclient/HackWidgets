@@ -65,7 +65,7 @@ class TodayWidget : GlanceAppWidget() {
             val widgetWidth = LocalSize.current.width
             val fittingSp = calculateFittingFontSize(
                 text = text,
-                maxWidth = widgetWidth - 8.dp,
+                maxWidth = widgetWidth - 40.dp,
             )
 
             Column(
@@ -104,7 +104,7 @@ fun calculateFittingFontSize(
     text: String,
     maxWidth: Dp,
     maxFontSizeSp: Float = 32f,
-    minFontSizeSp: Float = 10f
+    minFontSizeSp: Float = 1f
 ): TextUnit {
     val context = LocalContext.current
     val displayMetrics = context.resources.displayMetrics
