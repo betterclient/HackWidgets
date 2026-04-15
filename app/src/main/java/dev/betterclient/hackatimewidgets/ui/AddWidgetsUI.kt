@@ -2,12 +2,14 @@ package dev.betterclient.hackatimewidgets.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.rememberLifecycleOwner
 import androidx.lifecycle.coroutineScope
 import dev.betterclient.hackatimewidgets.Api
@@ -24,7 +26,7 @@ fun AddWidgetsUI(api: Api) {
     }
 
     Box(
-        Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd
+        Modifier.fillMaxSize().padding(16.dp), contentAlignment = Alignment.BottomEnd
     ) {
         val ctx = rememberLifecycleOwner()
         val context = LocalContext.current
