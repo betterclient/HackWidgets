@@ -1,4 +1,4 @@
-package dev.betterclient.hackatimewidgets
+package dev.betterclient.hackatimewidgets.api
 
 import android.content.Context
 import android.net.Uri

@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class HoursResponse(
     val start_date: LocalDate,
     val end_date: LocalDate,
-    val total_seconds: Double
+    val total_seconds: Int
 )

@@ -1,5 +1,6 @@
 package dev.betterclient.hackatimewidgets
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -17,6 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import dev.betterclient.hackatimewidgets.api.Api
+import dev.betterclient.hackatimewidgets.api.PKCEOAuth
+import dev.betterclient.hackatimewidgets.api.getToken
+import dev.betterclient.hackatimewidgets.api.launchAuth
+import dev.betterclient.hackatimewidgets.api.setToken
 import dev.betterclient.hackatimewidgets.ui.AddWidgetsUI
 import dev.betterclient.hackatimewidgets.ui.setContent0
 import kotlinx.coroutines.flow.first
@@ -24,7 +29,7 @@ import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
 class MainActivity : ComponentActivity() {
-    private var activeAuth: PKCEOAuth? = null
+    var activeAuth: PKCEOAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,30 +49,7 @@ class MainActivity : ComponentActivity() {
         }
 
         lifecycleScope.launch {
-            val token = getToken(this@MainActivity).first()
-            if (token == null) {
-                activeAuth = PKCEOAuth(
-                    onFinish = { output, error ->
-                        if (output != null) {
-                            lifecycleScope.launch { setToken(this@MainActivity, output.accessToken) }
-                            setContent0 {
-                                AddWidgetsUI(Api(output.accessToken), this@MainActivity)
-                            }
-                        } else {
-                            Toast.makeText(this@MainActivity, error, Toast.LENGTH_SHORT).show()
-                            exitProcess(0)
-                        }
-                    },
-                    onLink = { link ->
-                        val customTabsIntent = CustomTabsIntent.Builder().build()
-                        customTabsIntent.launchUrl(this@MainActivity, link.toUri())
-                    }
-                )
-            } else {
-                setContent0 {
-                    AddWidgetsUI(Api(token), this@MainActivity)
-                }
-            }
+            launchAuth()
         }
     }
 
@@ -80,4 +62,14 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    fun startWidgetUI(token: String) {
+        setContent0 {
+            AddWidgetsUI(Api(token), this::startAuthFlow)
+        }
+    }
+}
+
+suspend fun getApi(context: Context): Api? {
+    return getToken(context).first()?.let { Api(it) }
 }

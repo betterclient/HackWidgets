@@ -74,4 +74,7 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
 
     implementation(libs.kotlinx.datetime)
+
+    implementation(libs.androidx.glance.appwidget)
+    implementation(libs.androidx.glance.material3)
 }

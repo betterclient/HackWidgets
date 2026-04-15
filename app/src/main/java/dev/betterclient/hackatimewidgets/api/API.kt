@@ -1,6 +1,5 @@
 package dev.betterclient.hackatimewidgets.api
 
-import dev.betterclient.hackatimewidgets.PKCEOAuth
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.OkHttp
