@@ -12,5 +12,5 @@
     android:targetCellHeight="1"
 
     android:maxResizeWidth="175dp"
-    android:maxResizeHeight="175dp">
+    android:maxResizeHeight="60dp">
 </appwidget-provider>

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">HackatimeWidgets</string>
+    <string name="app_name">HackWidget</string>
+    <string name="widget_today">Coding time (today)</string>
 </resources>
