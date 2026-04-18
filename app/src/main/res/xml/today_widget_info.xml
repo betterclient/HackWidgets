@@ -13,6 +13,7 @@
 
     android:configure="dev.betterclient.hackatimewidgets.widget.today.TodayWidgetConfigureScreen"
     android:widgetFeatures="reconfigurable"
+    android:updatePeriodMillis="1800000"
 
     android:maxResizeWidth="175dp"
     android:maxResizeHeight="60dp">

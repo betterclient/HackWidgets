@@ -9,10 +9,14 @@ import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.LocalSize
+import androidx.glance.action.ActionParameters
+import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.LinearProgressIndicator
 import androidx.glance.appwidget.SizeMode
+import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
 import androidx.glance.background
@@ -32,6 +36,7 @@ import androidx.glance.text.TextStyle
 import dev.betterclient.hackatimewidgets.api.now
 import dev.betterclient.hackatimewidgets.getApi
 import dev.betterclient.hackatimewidgets.widget.calculateFittingFontSize
+import dev.betterclient.hackatimewidgets.widget.weekly.WeeklyWidget
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -84,7 +89,8 @@ class TodayWidget : GlanceAppWidget() {
                     .fillMaxSize()
                     .background(GlanceTheme.colors.background)
                     .cornerRadius(32.dp)
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .clickable(actionRunCallback<RefreshTodayAction>()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -121,3 +127,8 @@ class TodayWidget : GlanceAppWidget() {
     }
 }
 
+class RefreshTodayAction : ActionCallback {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        TodayWidget().update(context, glanceId)
+    }
+}

@@ -9,10 +9,14 @@ import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.LocalSize
+import androidx.glance.action.ActionParameters
+import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.LinearProgressIndicator
 import androidx.glance.appwidget.SizeMode
+import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.state.getAppWidgetState
@@ -92,7 +96,8 @@ class WeeklyWidget : GlanceAppWidget() {
                     .fillMaxSize()
                     .background(GlanceTheme.colors.background)
                     .cornerRadius(32.dp)
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .clickable(actionRunCallback<RefreshWeeklyAction>()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -128,5 +133,11 @@ class WeeklyWidget : GlanceAppWidget() {
                 }
             }
         }
+    }
+}
+
+class RefreshWeeklyAction : ActionCallback {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        WeeklyWidget().update(context, glanceId)
     }
 }
