@@ -11,6 +11,9 @@
     android:targetCellWidth="2"
     android:targetCellHeight="1"
 
+    android:configure="dev.betterclient.hackatimewidgets.widget.weekly.WeeklyWidgetConfigurationScreen"
+    android:widgetFeatures="reconfigurable"
+
     android:maxResizeWidth="175dp"
     android:maxResizeHeight="60dp">
 </appwidget-provider>

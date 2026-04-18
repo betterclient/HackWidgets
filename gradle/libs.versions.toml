@@ -1,5 +1,6 @@
 [versions]
 agp = "8.13.2"
+appcompat = "1.8.0-alpha01"
 browser = "1.10.0"
 datastore = "1.2.1"
 glanceAppwidget = "1.2.0-rc01"
@@ -14,6 +15,7 @@ composeBom = "2026.03.01"
 material3 = "1.5.0-alpha17"
 
 [libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }

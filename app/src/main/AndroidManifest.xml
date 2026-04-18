@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".widget.TodayWidgetProvider"
+        <receiver android:name=".widget.today.TodayWidgetProvider"
             android:exported="true"
             android:label="@string/widget_today">
             <intent-filter>
@@ -42,8 +42,35 @@
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/my_app_widget_info" />
+                android:resource="@xml/today_widget_info" />
         </receiver>
+
+        <activity
+            android:name=".widget.today.TodayWidgetConfigureScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".widget.weekly.WeeklyWidgetProvider"
+            android:exported="true"
+            android:label="@string/widget_weekly">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/weekly_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".widget.weekly.WeeklyWidgetConfigurationScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

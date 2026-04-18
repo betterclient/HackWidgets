@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.browser)
+    implementation(libs.androidx.appcompat)
 
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)

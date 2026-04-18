@@ -1,8 +1,10 @@
-package dev.betterclient.hackatimewidgets.widget
+package dev.betterclient.hackatimewidgets.widget.today
 
 import android.content.Context
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
@@ -14,6 +16,7 @@ import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
 import androidx.glance.background
+import androidx.glance.currentState
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
@@ -23,10 +26,12 @@ import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.layout.width
+import androidx.glance.state.PreferencesGlanceStateDefinition
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import dev.betterclient.hackatimewidgets.api.now
 import dev.betterclient.hackatimewidgets.getApi
+import dev.betterclient.hackatimewidgets.widget.calculateFittingFontSize
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
@@ -34,8 +39,13 @@ class TodayWidgetProvider : GlanceAppWidgetReceiver() {
     override val glanceAppWidget = TodayWidget()
 }
 
+object TodayWidgetPreferences {
+    val hourTarget = intPreferencesKey("HOUR_TARGET")
+}
+
 class TodayWidget : GlanceAppWidget() {
     override val sizeMode = SizeMode.Exact
+    override val stateDefinition = PreferencesGlanceStateDefinition
 
     override suspend fun provideGlance(
         context: Context,
@@ -57,6 +67,12 @@ class TodayWidget : GlanceAppWidget() {
         }
 
         provideContent {
+            val state = currentState<Preferences>()
+            val hourTarget = state[TodayWidgetPreferences.hourTarget] ?: 8
+
+            val prog = if (statsToday == 0) 0f else (statsToday / 3600f) / (hourTarget)
+            val progPercent = (prog * 100).toInt()
+
             val widgetWidth = LocalSize.current.width
             val fittingSp = calculateFittingFontSize(
                 text = text,
@@ -83,8 +99,6 @@ class TodayWidget : GlanceAppWidget() {
                 )
 
                 Spacer(GlanceModifier.defaultWeight())
-                val prog = if (statsToday == 0) 0f else (statsToday / 3600f) / 24f
-                val progPercent = (prog * 100).toInt()
                 Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     LinearProgressIndicator(
                         modifier = GlanceModifier
@@ -106,3 +120,4 @@ class TodayWidget : GlanceAppWidget() {
         }
     }
 }
+
