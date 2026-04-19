@@ -14,6 +14,7 @@
     android:configure="dev.betterclient.hackatimewidgets.widget.circular.CircularWidgetConfigurationScreen"
     android:widgetFeatures="reconfigurable"
     android:updatePeriodMillis="1800000"
+    android:previewImage="@drawable/circular"
 
     android:maxResizeWidth="175dp"
     android:maxResizeHeight="175dp">
