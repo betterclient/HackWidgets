@@ -71,6 +71,25 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".widget.circular.CircularWidgetProvider"
+            android:exported="true"
+            android:label="@string/widget_circular">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/circular_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".widget.circular.CircularWidgetConfigurationScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

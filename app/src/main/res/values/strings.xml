@@ -2,4 +2,5 @@
     <string name="app_name">HackWidget</string>
     <string name="widget_today">Coding time (today)</string>
     <string name="widget_weekly">Coding time (weekly)</string>
+    <string name="widget_circular">Circular time</string>
 </resources>

@@ -1,0 +1,20 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/glance_default_loading_layout"
+    android:resizeMode="horizontal|vertical"
+
+    android:minWidth="50dp"
+    android:minHeight="50dp"
+
+    android:minResizeWidth="30dp"
+    android:minResizeHeight="30dp"
+
+    android:targetCellWidth="1"
+    android:targetCellHeight="1"
+
+    android:configure="dev.betterclient.hackatimewidgets.widget.circular.CircularWidgetConfigurationScreen"
+    android:widgetFeatures="reconfigurable"
+    android:updatePeriodMillis="1800000"
+
+    android:maxResizeWidth="175dp"
+    android:maxResizeHeight="175dp">
+</appwidget-provider>
