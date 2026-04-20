@@ -17,9 +17,13 @@ import androidx.glance.GlanceTheme
 import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.LocalSize
+import androidx.glance.action.ActionParameters
+import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
+import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.state.getAppWidgetState
@@ -35,6 +39,7 @@ import androidx.glance.text.TextStyle
 import dev.betterclient.hackatimewidgets.api.now
 import dev.betterclient.hackatimewidgets.getApi
 import dev.betterclient.hackatimewidgets.widget.calculateFittingFontSize
+import dev.betterclient.hackatimewidgets.widget.today.TodayWidget
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.isoDayNumber
 import kotlinx.datetime.minus
@@ -86,6 +91,7 @@ class CircularWidget : GlanceAppWidget() {
                 GlanceModifier
                     .fillMaxSize()
                     .padding(16.dp)
+                    .clickable(actionRunCallback<RefreshCircularAction>())
                     .then(
                         if (background) {
                             GlanceModifier
@@ -190,5 +196,11 @@ class CircularWidget : GlanceAppWidget() {
         })
 
         return bitmap
+    }
+}
+
+class RefreshCircularAction : ActionCallback {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        CircularWidget().update(context, glanceId)
     }
 }

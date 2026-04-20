@@ -3,4 +3,5 @@
     <string name="widget_today">Coding time (today)</string>
     <string name="widget_weekly">Coding time (weekly)</string>
     <string name="widget_circular">Circular time</string>
+    <string name="widget_activity">Activity</string>
 </resources>

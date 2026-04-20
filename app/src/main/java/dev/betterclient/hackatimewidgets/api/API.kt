@@ -17,7 +17,7 @@ import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.json.Json
 import kotlin.time.Clock
 
-class Api(private val token: String) {
+class Api(val token: String) {
     val client = HttpClient(OkHttp) {
         install(ContentNegotiation) {
             json(Json {
