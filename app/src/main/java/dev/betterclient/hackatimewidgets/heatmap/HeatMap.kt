@@ -73,25 +73,6 @@ suspend fun recordHeatmap(api: Api, context: Context, updateProgress: suspend (I
     saveHeatMap(context, HeatMap(filtered))
 }
 
-suspend fun isHeatmapComplete(context: Context): Boolean {
-    val heatmap = loadHeatMap(context) ?: return false
-
-    val usage = heatmap.usage
-    if (usage.isEmpty()) return false
-
-    val now = now()
-    val oneYearAgo = now.minus(1, DateTimeUnit.YEAR)
-
-    val minDay = usage.first().day
-    val maxDay = usage.last().day
-
-    if (minDay > oneYearAgo || maxDay < now) return false
-
-    val expectedDays = oneYearAgo.daysUntil(now) + 1
-
-    return usage.size >= expectedDays
-}
-
 suspend fun loadHeatMap(context: Context): HeatMap? {
     val prefs = context.dataStore.data.first()
     val json = prefs[HEATMAP_KEY] ?: return null
