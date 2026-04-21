@@ -101,7 +101,7 @@ suspend fun getMissingDaysCount(context: Context): Int {
     return if (missing < 0) 0 else missing
 }
 
-suspend fun enqueueHeatmapJob(apiToken: String, context: Context) {
+fun enqueueHeatmapJob(apiToken: String, context: Context) {
     val workRequest = OneTimeWorkRequestBuilder<HeatmapWorker>()
         .setInputData(workDataOf("token" to apiToken))
         .build()
