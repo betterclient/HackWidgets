@@ -12,7 +12,7 @@
     android:targetCellHeight="1"
 
     android:updatePeriodMillis="1800000"
-    android:previewImage="@drawable/heatmap"
+    android:previewImage="@drawable/streak"
 
     android:maxResizeWidth="300dp"
     android:maxResizeHeight="300dp">
