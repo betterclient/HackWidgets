@@ -1,0 +1,19 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/glance_default_loading_layout"
+    android:resizeMode="horizontal|vertical"
+
+    android:minWidth="50dp"
+    android:minHeight="50dp"
+
+    android:minResizeWidth="50dp"
+    android:minResizeHeight="50dp"
+
+    android:targetCellWidth="1"
+    android:targetCellHeight="1"
+
+    android:updatePeriodMillis="1800000"
+    android:previewImage="@drawable/heatmap"
+
+    android:maxResizeWidth="300dp"
+    android:maxResizeHeight="300dp">
+</appwidget-provider>

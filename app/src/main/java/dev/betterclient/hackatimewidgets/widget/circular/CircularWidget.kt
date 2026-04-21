@@ -39,7 +39,6 @@ import androidx.glance.text.TextStyle
 import dev.betterclient.hackatimewidgets.api.now
 import dev.betterclient.hackatimewidgets.getApi
 import dev.betterclient.hackatimewidgets.widget.calculateFittingFontSize
-import dev.betterclient.hackatimewidgets.widget.today.TodayWidget
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.isoDayNumber
 import kotlinx.datetime.minus
